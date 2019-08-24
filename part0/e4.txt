@@ -1,0 +1,15 @@
+title fullstack notes
+note over browser: push save
+browser -> server: post new_note
+server -> browser :notes
+note over browser: read new_note as html
+browser -> server: http GET main.css
+server -> browser: main.css
+browser ->server: http GET main.js
+server -> browser: main.js
+note over browser:read main.js
+browser ->server:http GET data.json
+server ->browser: data.json
+note over browser:
+read data.json and create
+list of responses
