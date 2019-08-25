@@ -1,17 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-const now = new Date();
-const a = 10;
-const b = 20;
+
+const Hello = (props) =>{
+return(
+    <div>
+        <p>Hello {props.name} you are {props.age}</p>
+    </div>
+)
+
+}
 const App = () =>{
     console.log('Hello from component')
  return( 
- <div>
-     <p>Hello World it is {now.toString()}</p>
-     <p>
-         {a} plus {b} is {a+b}
-     </p>
- </div>
+ <>
+     <p>Greetings</p>
+    <Hello name="Jacob" age="40"/>
+    <Hello name="Maya"  age={26+10} />
+ </>
  )
 }
 
