@@ -1,0 +1,14 @@
+title exercise 5
+browser ->server:HTTP GET spa
+server -->browser:spa
+note over browser: read spa
+browser ->server:HTTP GET main.css
+server -->browser: main.css
+browser ->server:HTTP GET spa.js
+server -->browser:spa.js
+note over browser: read spa.js
+browser ->server: HTTP GET data.json
+server -->browser: data.json
+note over browser: 
+read data.json
+add items to list
