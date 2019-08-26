@@ -1,0 +1,8 @@
+title exercise 6
+note over browser:
+push submit
+add text to local list
+end note 
+browser -> server:new_note_spa
+note over server: get new item only
+server -->browser: status 201
