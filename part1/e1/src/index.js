@@ -6,7 +6,7 @@ const Header = (props) =>{
     );
 }
 
-const Content_line =(props) =>{
+const Part =(props) =>{
     return(
         <p>{props.name}  {props.credit}</p>
     )
@@ -14,9 +14,9 @@ const Content_line =(props) =>{
 
 const Content = (props) =>{
     return (
-       <Content_line name={props.n1}  credit={props.e1} />
-       <Content_line name={props.n2}  credit={props.e2} />
-       <Content_line name={props.n3}  credit={props.e3} />
+       <Part name={props.n1}  credit={props.e1} />
+       <Part name={props.n2}  credit={props.e2} />
+       <Part name={props.n3}  credit={props.e3} />
     );
 }
 const Footer = (props) =>{
