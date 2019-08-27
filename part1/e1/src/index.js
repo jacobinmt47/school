@@ -14,9 +14,11 @@ const Part =(props) =>{
 
 const Content = (props) =>{
     return (
+        <>
        <Part name={props.n1}  credit={props.e1} />
        <Part name={props.n2}  credit={props.e2} />
        <Part name={props.n3}  credit={props.e3} />
+       </>
     );
 }
 const Footer = (props) =>{
