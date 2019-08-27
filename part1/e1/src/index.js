@@ -47,7 +47,7 @@ const App =() =>{
         <div>
             {Header(course) }
             <Content c1={part1} c2={part2} c3={part3} />
-            {Footer (exercises1+exercises2+exercises3)}
+            {Footer (part1.exercises+part2.exercises+part3.exercises)}
         </div>
     )
 }
