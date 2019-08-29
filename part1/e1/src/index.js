@@ -29,7 +29,7 @@ const Footer = (props) =>{
 }
 const App =() =>{
     const course ="Half Stack application development";
-
+/*
    const part1 ={
     name:"Fundamentals of react",
     exercises:10,
@@ -42,12 +42,28 @@ const App =() =>{
     name:"State of a component",
     exercises:14,
    }
+   */
+  const parts = [
+    {
+    name:"Fundaments of react",
+    exercises:10,
+    },
+    {
+    name:"Using props to pass data",
+    exercises:7,
+    },
+    {
+    name:"State of a component",
+    exercises:14,
+    }
+
+]
 
     return(
         <div>
             {Header(course) }
-            <Content c1={part1} c2={part2} c3={part3} />
-            {Footer (part1.exercises+part2.exercises+part3.exercises)}
+            <Content c1={parts[0]} c2={parts[1]} c3={parts[2]} />
+            {Footer (parts[0].exercises+parts[1].exercises+parts[2].exercises)}
         </div>
     )
 }
