@@ -2,49 +2,34 @@ import React,{useState} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-const All = (props) =>{
-    let total = props.good + props.neutral + props.bad;
-    return(
-        <> total {total}</>
-    )
+const all = (good,neutral,bad) =>{
+    let total = good + neutral +bad;
+    return(total)
 }
 
-const Average = (props) =>{
-    let positive = props.good - props.bad;
-    let total = props.good + props.neutral + props.bad ;
-    return (
-        <>average {positive/total}</>
-    )
+const average = (good,neutral,bad) =>{
+    let positive = good - bad;
+    let total = good + neutral +bad ;
+    return (positive/total)
 }
-const Positive = (props) =>{
-    let p = props.good ;
-    let total = props.good + props.neutral + props.bad ;
-    return (
-        <>positive {(p/total)*100 +"%"}</>
-    )
+
+const positive = (good,neutral,bad) =>{
+    let p = good ;
+    let total = good + neutral + bad ;
+    return ((p/total)*100 +"%")
 }
 
 const Statistics =(props) =>{
-    if(props.good === 0 && props.neutral === 0 && props.bad === 0 ){
-        return(
-            <> 
-            </>
-        )
-        // no feedback to display
+    if(props.show === 0){
+        return(<></>)
     }
-    return (
-        <>
-        if(props.type==="good"){<li>props.good</li>}
-        if(props.type==="neutral"){<li>props.neutral</li>}
-        if(props.type==="bad"){<li>props.bad</li>}
-        if(props.type==="average"){<li>{Average(props)}</li>}
-        if(props.type==="all"){<li>{All(props)}</li>}
-        if(props.type==="positive"){<li>{Positive(props)}</li>}
-        </>
+ return (
+        <li>
+            {props.text}{ props.value}
+        </li>
     )
     }
 const Button = (props) =>{
-
     return(
         <button onClick={props.handleClick}>
             {props.text}
@@ -56,15 +41,18 @@ const App = () =>{
 const [good,setGood] = useState(0)
 const [neutral,setNeutral] = useState(0)
 const [bad,setBad] = useState(0)
-
+const [showStats,setShowStats] =useState(0)
 // callback handlers
 const setG = () => {
+    setShowStats(1)
     return ( setGood(good +1))
 }
 const setN = () => {
+    setShowStats(1)
     return(setNeutral(neutral +1))
 }
 const setB = () =>{
+    setShowStats(1)
     return (setBad(bad +1))
 }
 
@@ -77,12 +65,12 @@ return(
         <Button handleClick={setB} text="bad" />
         <h1>statistics</h1>
         <ul>
-        <Statistics good={good} neutral={neutral} bad={bad} type="good" />
-        <Statistics good={good} neutral={neutral} bad={bad} type="neutral" />
-        <Statistics good={good} neutral={neutral} bad={bad} type="bad" />
-        <Statistics good={good} neutral={neutral} bad={bad} type="all" />
-        <Statistics good={good} neutral={neutral} bad={bad} type="average" />
-        <Statistics good={good} neutral={neutral} bad={bad} type="positive" />
+        <Statistics text="good" value={good} show={showStats}/>
+        <Statistics text="neutral" value={neutral} show={showStats}/>
+        <Statistics text="bad" value={bad} show={showStats} />
+        <Statistics text="total" value={all(good,neutral,bad)} show={showStats} />
+        <Statistics text="average" value={average(good,neutral,bad)} show={showStats} />
+        <Statistics text="positive" value={positive(good,neutral,bad)} show={showStats} />
         </ul>
     </div>
     
