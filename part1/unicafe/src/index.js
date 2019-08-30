@@ -24,9 +24,9 @@ const Statistics =(props) =>{
         return(<></>)
     }
  return (
-        <li>
-            {props.text}{ props.value}
-        </li>
+        <tr>
+           <td>{props.text}</td><td>{ props.value}</td>
+        </tr>
     )
     }
 const Button = (props) =>{
@@ -64,14 +64,15 @@ return(
         <Button handleClick={setN} text="neutral" />
         <Button handleClick={setB} text="bad" />
         <h1>statistics</h1>
-        <ul>
+        <table><tbody>
         <Statistics text="good" value={good} show={showStats}/>
         <Statistics text="neutral" value={neutral} show={showStats}/>
         <Statistics text="bad" value={bad} show={showStats} />
         <Statistics text="total" value={all(good,neutral,bad)} show={showStats} />
         <Statistics text="average" value={average(good,neutral,bad)} show={showStats} />
         <Statistics text="positive" value={positive(good,neutral,bad)} show={showStats} />
-        </ul>
+        </tbody>
+        </table>
     </div>
     
 )
