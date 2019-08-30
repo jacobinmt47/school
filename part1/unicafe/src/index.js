@@ -27,20 +27,20 @@ const Positive = (props) =>{
 const Statistics =(props) =>{
     if(props.good === 0 && props.neutral === 0 && props.bad === 0 ){
         return(
-            <><br />
-            No feedback given 
+            <> 
             </>
         )
+        // no feedback to display
     }
     return (
-        <ul>
-        <li>good  {props.good}</li>
-        <li>neutral {props.neutral}</li>
-        <li>bad {props.bad}</li> 
-        <li>{All(props)}</li>
-        <li>{Average(props)}</li>
-        <li>{Positive(props)}</li>
-        </ul>
+        <>
+        if(props.type==="good"){<li>props.good</li>}
+        if(props.type==="neutral"){<li>props.neutral</li>}
+        if(props.type==="bad"){<li>props.bad</li>}
+        if(props.type==="average"){<li>{Average(props)}</li>}
+        if(props.type==="all"){<li>{All(props)}</li>}
+        if(props.type==="positive"){<li>{Positive(props)}</li>}
+        </>
     )
     }
 const Button = (props) =>{
@@ -76,8 +76,16 @@ return(
         <Button handleClick={setN} text="neutral" />
         <Button handleClick={setB} text="bad" />
         <h1>statistics</h1>
-        <Statistics good={good} neutral={neutral} bad={bad} />
+        <ul>
+        <Statistics good={good} neutral={neutral} bad={bad} type="good" />
+        <Statistics good={good} neutral={neutral} bad={bad} type="neutral" />
+        <Statistics good={good} neutral={neutral} bad={bad} type="bad" />
+        <Statistics good={good} neutral={neutral} bad={bad} type="all" />
+        <Statistics good={good} neutral={neutral} bad={bad} type="average" />
+        <Statistics good={good} neutral={neutral} bad={bad} type="positive" />
+        </ul>
     </div>
+    
 )
 }
 
