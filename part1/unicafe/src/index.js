@@ -5,7 +5,7 @@ import './index.css';
 const All = (props) =>{
     let total = props.good + props.neutral + props.bad;
     return(
-        <li> total {total}</li>
+        <> total {total}</>
     )
 }
 
@@ -13,15 +13,36 @@ const Average = (props) =>{
     let positive = props.good - props.bad;
     let total = props.good + props.neutral + props.bad ;
     return (
-        <li>average {positive/total}</li>
+        <>average {positive/total}</>
     )
 }
 const Positive = (props) =>{
     let p = props.good ;
     let total = props.good + props.neutral + props.bad ;
     return (
-        <li>positive {(p/total)*100 +"%"}</li>
+        <>positive {(p/total)*100 +"%"}</>
     )
+}
+
+const Statistics =(props) =>{
+    if(props.good === 0 && props.neutral === 0 && props.bad === 0 ){
+        return(
+            <><br />
+            No feedback given 
+            </>
+        )
+    }
+    return (
+        <ul>
+        <li>good  {props.good}</li>
+        <li>neutral {props.neutral}</li>
+        <li>bad {props.bad}</li> 
+        <li>{All(props)}</li>
+        <li>{Average(props)}</li>
+        <li>{Positive(props)}</li>
+        </ul>
+    )
+
 }
 
 
@@ -49,14 +70,7 @@ return(
         <button onClick={setN}>neutral</button>
         <button onClick={setB}>bad</button><br />
         <h1>statistics</h1>
-        <ul>
-            <li>good  {good}</li>
-            <li>neutral {neutral}</li>
-            <li>bad {bad}</li>
-            <All good={good} neutral={neutral} bad={bad} />
-            <Average good={good} neutral={neutral} bad={bad} />
-            <Positive good={good} neutral={neutral} bad={bad} />
-        </ul>
+        <Statistics good={good} neutral={neutral} bad={bad} />
     </div>
 )
 }
