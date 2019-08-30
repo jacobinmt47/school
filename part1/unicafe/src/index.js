@@ -2,6 +2,29 @@ import React,{useState} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
+const All = (props) =>{
+    let total = props.good + props.neutral + props.bad;
+    return(
+        <li> total {total}</li>
+    )
+}
+
+const Average = (props) =>{
+    let positive = props.good - props.bad;
+    let total = props.good + props.neutral + props.bad ;
+    return (
+        <li>average {positive/total}</li>
+    )
+}
+const Positive = (props) =>{
+    let p = props.good ;
+    let total = props.good + props.neutral + props.bad ;
+    return (
+        <li>positive {(p/total)*100 +"%"}</li>
+    )
+}
+
+
 const App = () =>{
 const [good,setGood] = useState(0)
 const [neutral,setNeutral] = useState(0)
@@ -30,6 +53,9 @@ return(
             <li>good  {good}</li>
             <li>neutral {neutral}</li>
             <li>bad {bad}</li>
+            <All good={good} neutral={neutral} bad={bad} />
+            <Average good={good} neutral={neutral} bad={bad} />
+            <Positive good={good} neutral={neutral} bad={bad} />
         </ul>
     </div>
 )
