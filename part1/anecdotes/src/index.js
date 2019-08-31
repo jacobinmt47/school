@@ -17,16 +17,41 @@ import './index.css';
         </button>
     )
 }
+
+const Votes = (props) => {
+  if(props.votes ===1){
+    return(
+    <>
+    has 1 vote
+    </>
+    )
+  }
+  return(
+    <>
+    has {props.votes} votes
+    </>
+  )
+}
 const App = (props) => {
     const [selected, setSelected] = useState(0)
+    const [points, setPoints] = useState([0,0,0,0,0,0])
+
     const setNum = () =>{
         const r = Math.floor(Math.random()*6) 
         setSelected(r)
     }
-    
+    const setP=() =>{
+      let p = points
+      p[selected] = p[selected] + 1
+      setPoints(p)
+      console.log(p)
+    }
+
     return (
       <div>
          { anecdotes[selected]} <br />
+          <Votes votes ={points[selected]} /> <br />
+         <Button text="upvote" handleClick = {setP} />
          <Button text="next item" handleClick = {setNum} />
       </div>
     )
