@@ -44,21 +44,29 @@ const App = (props) => {
       let p = points
       p[selected] = p[selected] + 1
       setPoints(p)
-      console.log(p)
     }
     const findMax =(array) =>{
-      let s = array.sort()
-      let m = s[array.length-1]
-      let index =s.findIndex((x) =>{return x === m})
-      return index 
+     let v = 0
+     let i = 0
+     let retIndex = 0
+     for(i = 0;i< array.length ;i++){
+       if (v > array[i]){
+          v = array[i]
+          retIndex = i
+       }
+     }
+     return retIndex
     }
 
     return (
       <div>
+        <h1>Anecdote of the day</h1>
          { anecdotes[selected]} <br />
           <Votes votes ={points[selected]} /> <br />
          <Button text="upvote" handleClick = {setP} />
          <Button text="next item" handleClick = {setNum} />
+         <h1>Anecdote with most votes</h1>
+         {anecdotes[findMax(points)]}
       </div>
     )
   }
