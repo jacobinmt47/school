@@ -46,6 +46,12 @@ const App = (props) => {
       setPoints(p)
       console.log(p)
     }
+    const findMax =(array) =>{
+      let s = array.sort()
+      let m = s[array.length-1]
+      let index =s.findIndex((x) =>{return x === m})
+      return index 
+    }
 
     return (
       <div>
