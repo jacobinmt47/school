@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Parts = (props) =>{
-    const rows = props.map( p =><li>{p.name}  </li>)
+    const rows = props.courses.map(p =><li key ={p.id}>{p.name}  {p.exercises}</li> )
     return(
         rows
     )
@@ -9,10 +9,13 @@ const Parts = (props) =>{
 
 const Course =(props) =>{
     const course = props.course
-    const name = course.name
 return(
-    <li>{name}</li>,
-    <Parts props={course.parts} />
+    <div>
+    <h1>{course.name}</h1>
+    <ul>
+    <Parts courses={course.parts}/>
+    </ul>
+    </div>
 )
 
 }
