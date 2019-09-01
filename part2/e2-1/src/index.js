@@ -21,11 +21,21 @@ const notes = [
       important: true
     }
   ]
+  const Note = ({ note }) => {
+    return (
+      <li>{note.content}</li>
+    )
+  }
   
   const App = (props) => {
     const { notes } = props
 
-    const rows = () =>notes.map(note => <li key = {note.id}>{note.content}</li>)
+    const rows = () => notes.map(note =>
+      <Note 
+        key={note.id}
+        note={note}
+      />
+    )
     
     const result = () =>notes.map(note =>note.content)
     console.log(result)
