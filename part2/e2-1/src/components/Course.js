@@ -19,13 +19,13 @@ const Course =(props) =>{
     const sum =((s,p) =>  s + p)
     const total = array.reduce(sum)
     return(
-    <div>
-    <h1>{course.name}</h1>
-    <ul>
-    <Parts courses={course.parts}/>
-    <Sum sum={total}/>
-    </ul>
-    </div>
+        <div>
+            <h1>{course.name}</h1>
+            <ul>
+                <Parts courses={course.parts}/>
+                <Sum sum={total}/>
+            </ul>
+        </div>
 )
 
 }
