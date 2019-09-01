@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './components/Note';
-import './App';
+import App from './App';
 
 const notes = [
     {
