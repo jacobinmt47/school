@@ -2,23 +2,26 @@ import React,{useState} from 'react';
 import './App.css';
 const Names= (props) =>{
   const people = props.persons
-  const p = people.map(x =><li key={x.id}>{x.name}</li>)
+  const p = people.map(x =><li key={x.id}>{x.name} {x.phoneNumber}</li>)
   return(p)
 }
 
 function App() {
   const [ persons, setPersons] = useState([
     { name: 'Arto Hellas',
-      id:0
+      id:0,
+      phoneNumber:0
     }
   ]) 
+  const [ newPhone, setNewPhone] = useState('')
   const [ newName, setNewName ] = useState('')
 
   const addName = (event) =>{
     event.preventDefault()
     const p ={
       name:newName,
-      id:persons.length
+      id:persons.length,
+      phoneNumber:newPhone
     }
     const isNew = persons.findIndex((x) => x.name===p.name)
     console.log(isNew)
@@ -35,13 +38,16 @@ function App() {
   const handlePersonChange =(event) =>{
     setNewName(event.target.value)
   }
-
+  const handlePhoneChange =(event )=>{
+    setNewPhone(event.target.value)
+  }
   return (
     <div className="App">
       <h2>Phonebook</h2>
       <form onSubmit ={addName}>
         <div>
-          name: <input value={newName} onChange={handlePersonChange}/>
+          name: <input value={newName} onChange={handlePersonChange}/>< br />
+          number: <input value={newPhone} onChange={handlePhoneChange} />
         </div>
         <div>
           <button type="submit">add</button>
