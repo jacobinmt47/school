@@ -20,10 +20,17 @@ function App() {
       name:newName,
       id:persons.length
     }
-    console.log(p)
-    const x = persons.concat(p)
-    setPersons(x)
-    setNewName('')
+    const isNew = persons.findIndex((x) => x.name===p.name)
+    console.log(isNew)
+    if(isNew >=0 ){  //reject existing people
+      const astring = `${newName} is already added to phonebook`
+      alert(astring)
+    }
+    else{
+      const x = persons.concat(p)
+      setPersons(x)
+      setNewName('')
+    }
   } 
   const handlePersonChange =(event) =>{
     setNewName(event.target.value)
