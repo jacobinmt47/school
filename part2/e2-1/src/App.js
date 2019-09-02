@@ -1,6 +1,11 @@
 import React from 'react'
 import Course from './components/Course'
 
+const Manycourses =(props) =>{
+  const carray = props.course.map( c =><Course id ={c.id} parts={c.parts}/>)
+  return(carray)
+}
+
 const App = () => {
   const courses = [
     {
@@ -47,9 +52,10 @@ const App = () => {
     }
   ]
 
+
   return (
     <div>
-      <Course course={courses[0]} />
+      <Manycourses course={courses} />
     </div>
   )
 }
