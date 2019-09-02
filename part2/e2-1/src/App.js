@@ -2,7 +2,7 @@ import React from 'react'
 import Course from './components/Course'
 
 const Manycourses =(props) =>{
-  const carray = props.course.map( c =><Course id ={c.id} parts={c.parts}/>)
+  const carray = props.course.map( c =><Course key ={c.id} courses={c}/>)
   return(carray)
 }
 

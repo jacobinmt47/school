@@ -13,9 +13,8 @@ const Parts = (props) =>{
 }   
 
 const Course =(props) =>{
-    const course = props.course
+    const course = props.courses
     const array = course.parts.map(e =>e.exercises)
-    console.log(array)
     const sum =((s,p) =>  s + p)
     const total = array.reduce(sum)
     return(
