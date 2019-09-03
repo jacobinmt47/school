@@ -2,11 +2,12 @@ import React,{useState} from 'react';
 import './App.css';
 const Names= (props) =>{
   const people = props.persons
-  const filter = props.filter.toLowerString()
-  const fp = people.filter((x) =>x.toLowerString().includes(filter))
-  if(typeof(fp =='object')){
-    const p2 = fp.map(x =><li key={x.id}>{x.name} {x.phoneNumber}</li>)
-    return(p2)
+  const filter = props.filter.toLowerCase()
+  console.log(filter)
+  const fp = people.filter((x) =>x.name.toLowerCase().includes(filter))
+  if(typeof(fp ==='object')){ //if empty returns undefined
+    const p = fp.map(x =><li key={x.id}>{x.name} {x.phoneNumber}</li>)
+    return(p)
   }
   return('')
 }
@@ -39,6 +40,7 @@ const  App = () => {
       const x = persons.concat(p)
       setPersons(x)
       setNewName('')
+      setNewPhone('')
     }
   } 
   const handlePersonChange =(event) =>{
@@ -51,7 +53,7 @@ const  App = () => {
     const newFilterName = event.target.value
     setFilterName(newFilterName)
   }
-  
+
   return (
     <div className="App">
       <h2>Phonebook</h2>
