@@ -2,8 +2,13 @@ import React,{useState} from 'react';
 import './App.css';
 const Names= (props) =>{
   const people = props.persons
-  const p = people.map(x =><li key={x.id}>{x.name} {x.phoneNumber}</li>)
-  return(p)
+  const filter = props.filter.toLowerString()
+  const fp = people.filter((x) =>x.toLowerString().includes(filter))
+  if(typeof(fp =='object')){
+    const p2 = fp.map(x =><li key={x.id}>{x.name} {x.phoneNumber}</li>)
+    return(p2)
+  }
+  return('')
 }
 
 const  App = () => {
@@ -45,21 +50,8 @@ const  App = () => {
   const handleFilterChange = (event) =>{
     const newFilterName = event.target.value
     setFilterName(newFilterName)
-    //logic to filter items
-    const fp = persons.filter((x)=>{
-      return(x.name.toLowerCase().includes(newFilterName.toLowerCase()))
-    })
-    if(typeof(fp) =='undefined'){
-      //make list empty
-      const p =[{ name:'none',phoneNumber:0,id:0}]
-      setPersons(p)
-    }
-    else{
-      console.log(fp)
-      setPersons(fp)
-    }
-    
   }
+  
   return (
     <div className="App">
       <h2>Phonebook</h2>
@@ -75,7 +67,7 @@ const  App = () => {
         </div>
       </form>
       <h2>Numbers</h2>
-      <Names persons={persons}  />
+      <Names persons={persons} filter={filterName}  />
     </div>
   );
 }
