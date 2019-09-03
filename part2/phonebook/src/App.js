@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import './App.css';
-const Names= (props) =>{
+const Names = (props) =>{
   const people = props.persons
   const filter = props.filter.toLowerCase()
   console.log(filter)
