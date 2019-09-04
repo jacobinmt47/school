@@ -5,11 +5,19 @@ const Names = (props) =>{
   const filter = props.filter.toLowerCase()
   console.log(filter)
   const fp = people.filter((x) =>x.name.toLowerCase().includes(filter))
-  if(typeof(fp ==='object')){ //if empty returns undefined
+  if(typeof(fp ==='object')){ //if empty fp is undefined
     const p = fp.map(x =><li key={x.id}>{x.name} {x.phoneNumber}</li>)
     return(p)
   }
   return('')
+}
+const PhoneFilter =(props) =>{
+  return(
+    <>
+      filter showen with: <input value={props.filterName} onChange={props.handleFilterChange} />
+    </>
+  
+  )
 }
 
 const  App = () => {
@@ -50,14 +58,13 @@ const  App = () => {
     setNewPhone(event.target.value)
   }
   const handleFilterChange = (event) =>{
-    const newFilterName = event.target.value
-    setFilterName(newFilterName)
+    setFilterName( event.target.value)
   }
 
   return (
     <div className="App">
       <h2>Phonebook</h2>
-      filter showen with: <input value={filterName} onChange={handleFilterChange} />
+      <PhoneFilter filterName={filterName} handleFilterChange={handleFilterChange} />
       <h2>Add a new </h2>
       <form onSubmit ={addName}>
         <div>
