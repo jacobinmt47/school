@@ -3,7 +3,7 @@ import './App.css';
 const Names = (props) =>{
   const people = props.persons
   const filter = props.filter.toLowerCase()
-  console.log(filter)
+  //console.log(filter)
   const fp = people.filter((x) =>x.name.toLowerCase().includes(filter))
   if(typeof(fp ==='object')){ //if empty fp is undefined
     const p = fp.map(x =><li key={x.id}>{x.name} {x.phoneNumber}</li>)
@@ -12,13 +12,29 @@ const Names = (props) =>{
   return('')
 }
 const PhoneFilter =(props) =>{
+  //console.log(props)
   return(
     <>
       filter showen with: <input value={props.filterName} onChange={props.handleFilterChange} />
     </>
-  
   )
 }
+
+const PersonForm =(props) =>{
+ // console.log(props)
+  return(
+    <form onSubmit ={props.addName}>
+    <div>
+      name: <input value={props.newName} onChange={props.handlePersonChange}/>< br />
+      number: <input value={props.newPhone} onChange={props.handlePhoneChange} />
+    </div>
+    <div>
+      <button type="submit">add</button>
+    </div>
+  </form>
+  )
+}
+
 
 const  App = () => {
   const [ persons, setPersons] = useState([
@@ -66,15 +82,9 @@ const  App = () => {
       <h2>Phonebook</h2>
       <PhoneFilter filterName={filterName} handleFilterChange={handleFilterChange} />
       <h2>Add a new </h2>
-      <form onSubmit ={addName}>
-        <div>
-          name: <input value={newName} onChange={handlePersonChange}/>< br />
-          number: <input value={newPhone} onChange={handlePhoneChange} />
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
+      <PersonForm  
+      addName={addName} newName={newName} newPhone={newPhone} handlePersonChange={handlePersonChange} handlePhoneChange={handlePhoneChange}
+      />
       <h2>Numbers</h2>
       <Names persons={persons} filter={filterName}  />
     </div>
