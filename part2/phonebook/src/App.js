@@ -5,12 +5,13 @@ import './App.css';
 const Names = (props) =>{
   const people = props.persons
   const filter = props.filter.toLowerCase()
-  console.log(filter)
+  if(Array.isArray(people)){
   const fp = people.filter((x) =>x.name.toLowerCase().includes(filter))
   if(typeof(fp ==='object')){ //if empty fp is undefined
     const p = fp.map(x =><li key={x.id}>{x.name} {x.phoneNumber}</li>)
     return(p)
   }
+}
   return('')
 }
 const PhoneFilter =(props) =>{
@@ -23,7 +24,7 @@ const PhoneFilter =(props) =>{
 }
 
 const PersonForm =(props) =>{
-  console.log(props)
+ // console.log(props)
   return(
     <form onSubmit ={props.addName}>
     <div>
@@ -40,22 +41,23 @@ const PersonForm =(props) =>{
 
 const  App = () => {
   
-  const [ persons, setPersons] = useState('') 
+  const [ persons, setPersons] = useState('')
+  const [ newPhone, setNewPhone] = useState('')
+  const [ newName, setNewName ] = useState('')
+  const [filterName, setFilterName] =useState('') 
   useEffect(() =>{
     console.log("effect called")
     axios.get('http://localhost:3001/persons')
     .then(response =>{
       console.log("promise fullfilled")
+      if(persons ===''){//only call if persons is empty
       setPersons(response.data)
+      }
     })
-  }
+  },[persons]
   )
-  const [ newPhone, setNewPhone] = useState('')
-  const [ newName, setNewName ] = useState('')
-  const [filterName, setFilterName] =useState('')
-
-  
-  const addName = (event) =>{
+    const addName = (event) =>{
+    console.log("add Name Called ")
     event.preventDefault()
     const p ={
       name:newName,
@@ -63,7 +65,7 @@ const  App = () => {
       phoneNumber:newPhone
     }
     const isNew = persons.findIndex((x) => x.name===p.name)
-    console.log(isNew)
+    //console.log(isNew)
     if(isNew >=0 ){  //reject existing people
       const astring = `${newName} is already added to phonebook`
       alert(astring)
