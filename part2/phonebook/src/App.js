@@ -5,7 +5,7 @@ import './App.css';
 const Names = (props) =>{
   const people = props.persons
   const filter = props.filter.toLowerCase()
-  //console.log(filter)
+  console.log(filter)
   const fp = people.filter((x) =>x.name.toLowerCase().includes(filter))
   if(typeof(fp ==='object')){ //if empty fp is undefined
     const p = fp.map(x =><li key={x.id}>{x.name} {x.phoneNumber}</li>)
@@ -23,7 +23,7 @@ const PhoneFilter =(props) =>{
 }
 
 const PersonForm =(props) =>{
- // console.log(props)
+  console.log(props)
   return(
     <form onSubmit ={props.addName}>
     <div>
@@ -40,19 +40,12 @@ const PersonForm =(props) =>{
 
 const  App = () => {
   
-  const [ persons, setPersons] = useState([
-   /* { name: 'Arto Hellas', phoneNumber: '040-123456',id:0 },
-    { name: 'Ada Lovelace', phoneNumber: '39-44-5323523',id:1 },
-    { name: 'Dan Abramov', phoneNumber: '12-43-234345',id:2 },
-    { name: 'Mary Poppendieck', phoneNumber: '39-23-6423122',id:3 }
-    */
-  ]) 
+  const [ persons, setPersons] = useState('') 
   useEffect(() =>{
     console.log("effect called")
     axios.get('http://localhost:3001/persons')
     .then(response =>{
       console.log("promise fullfilled")
-      console.log(response.data)
       setPersons(response.data)
     })
   }
