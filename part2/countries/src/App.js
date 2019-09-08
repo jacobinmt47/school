@@ -13,17 +13,23 @@ const Search =(props) =>{
 }
 
 const Countries =(props) =>{
-  const cntry = props.countries
-  const filter = props.filter
-  console.log(cntry)
-  if(typeof(cntry) ==='undefined'){
-    return(<>
-    space holding
-    </>)}
-  const c = cntry.Map(x =><li>{x.name}</li>)
-  return(
+  const cntry = props.cntry
+  const filter = props.filter.toLowerCase()
+  //console.log(Array.isArray(cntry,"is array countries"))
+  if(Array.isArray(cntry)){
+    console.log("arrayed called")
+    const d = cntry.map(x =>x.name.toLowerCase())
+    const fc =d.filter(x =>x.includes(filter))
+    const c = fc.map(x =><li key={x}>{x}</li>)
+    return(
+      <>
+      {c}
+      </>
+    )
+  }
+  
+return(
     <>
-    {c}
     </>
   )
 }
@@ -33,11 +39,11 @@ const App = () =>{
 
   useEffect(()=>{
    // const url = "http://restcountries.eu/rest/v2/all"
-    const url ="http://localhost:3001/"
+    const url ="http://localhost:3001/countries"
    console.log("Effect called")
     axios.get(url ).then(
       (response)=>{
-        console.log("promise kept --",response.data)
+        console.log("promise kept --")
         setCountries(response.data)
       }
     )
