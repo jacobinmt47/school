@@ -23,7 +23,7 @@ const Countries =(props) =>{
   const c = cntry.Map(x =><li>{x.name}</li>)
   return(
     <>
-    c
+    {c}
     </>
   )
 }
@@ -32,10 +32,12 @@ const App = () =>{
   const[filter,setFilter] = useState('')
 
   useEffect(()=>{
-    console.log("Effect called")
-    axios.get("http://restcountries.eu/rest/v2/all").then(
+   // const url = "http://restcountries.eu/rest/v2/all"
+    const url ="http://localhost:3001/"
+   console.log("Effect called")
+    axios.get(url ).then(
       (response)=>{
-        console.log("promise kept --")
+        console.log("promise kept --",response.data)
         setCountries(response.data)
       }
     )
@@ -45,8 +47,6 @@ const App = () =>{
     setFilter(event.target.value)
   }
   
-  
-
   return (
     <div>
       <Search filterName ={filter} handleFilterChange={handleFilterChange} />
