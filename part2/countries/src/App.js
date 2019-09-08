@@ -12,6 +12,17 @@ const Search =(props) =>{
   )
 }
 
+const Lang =(props) =>{
+  const l = props.languages
+  const ns =l.map(x=><li key={x.name}>{x.name}</li>)
+  console.log(ns)
+  return(
+    <ul>
+    {ns}
+    </ul>
+  )
+}
+
 const Countries =(props) =>{
   const cntry = props.cntry
   const filter = props.filter.toLowerCase()
@@ -21,6 +32,26 @@ const Countries =(props) =>{
     const d = cntry.map(x =>x.name.toLowerCase())
     const fc =d.filter(x =>x.includes(filter))
     const c = fc.map(x =><li key={x}>{x}</li>)
+    if(c.length ===1){
+      const y = cntry.filter(x =>x.name.toLowerCase().includes(filter))
+      console.log(y)
+      return(
+        <>
+        <h2>{y[0].name} </h2><br />
+        capital: {y[0].capital} <br />
+        population: {y[0].population} <br />
+        <Lang languages={y[0].languages} />
+        flag: {y[0].flag} <br />
+        </>
+      )
+    }
+    if(c.length >10){
+      return(
+        <>
+        To many matchs specifiy another filter
+        </>
+      )
+    }
     return(
       <>
       {c}
