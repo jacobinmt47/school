@@ -22,6 +22,23 @@ const Lang =(props) =>{
     </ul>
   )
 }
+const Country =(props) =>{
+  const cntry = props.cntry
+  const filter =props.filter
+    const y = cntry.filter(x =>x.name.toLowerCase().includes(filter))
+    console.log(y)
+    return(
+      <div>
+      <h2>{y[0].name} </h2><br />
+      capital: {y[0].capital} <br />
+      population: {y[0].population} <br />
+      <Lang languages={y[0].languages} />
+      flag: {y[0].flag} <br />
+      <img id ="img" src={y[0].flag} alt="flag of country" />
+      </div>
+    )
+
+}
 
 const Countries =(props) =>{
   const cntry = props.cntry
@@ -31,20 +48,11 @@ const Countries =(props) =>{
     console.log("arrayed called")
     const d = cntry.map(x =>x.name.toLowerCase())
     const fc =d.filter(x =>x.includes(filter))
-    const c = fc.map(x =><li key={x}>{x}</li>)
+    const c = fc.map(x =><div key={x+"key"}><li key={x}>{x}</li><button key={x+"btn"} id={x} onClick={props.btnclick}>show</button></div>)
     if(c.length ===1){
-      const y = cntry.filter(x =>x.name.toLowerCase().includes(filter))
-      //console.log(y)
-      return(
-        <div>
-        <h2>{y[0].name} </h2><br />
-        capital: {y[0].capital} <br />
-        population: {y[0].population} <br />
-        <Lang languages={y[0].languages} />
-        flag: {y[0].flag} <br />
-        <img src={y[0].flag} alt="flag of country" />
-        </div>
-      )
+    return(
+      <Country key="cntry1" cntry={cntry} filter={filter}/>
+    )
     }
     if(c.length >10){
       return(
@@ -54,19 +62,18 @@ const Countries =(props) =>{
       )
     }
     return(
-      <>
+      <div id="cnt2">
       {c}
-      </>
+      </div>
     )
   }
-  
 return(
     <>
     </>
   )
 }
 const App = () =>{
-  const[countries,setCountries] =useState('')
+  const[countries,setCountries] = useState('')
   const[filter,setFilter] = useState('')
 
   useEffect(()=>{
@@ -84,15 +91,19 @@ const App = () =>{
   const handleFilterChange = (event) =>{
     setFilter(event.target.value)
   }
+  const handleButtonPressed = (event)=> {
+    const btn = event.target
+    console.log(btn.id)
+    setFilter(btn.id)
+  }
   
   return (
-    <div>
-      <Search filterName ={filter} handleFilterChange={handleFilterChange} />
-      <ol>
-      <Countries cntry ={countries} filter={filter} />
-      </ol>
+    <div key="div1"> 
+      <Search key="search" filterName ={filter} handleFilterChange={handleFilterChange} />
+      <ul key="ol1">
+      <Countries key ="countries1" cntry ={countries} filter={filter} btnclick={handleButtonPressed} />
+      </ul>
     </div>
   );
 }
-
 export default App;
