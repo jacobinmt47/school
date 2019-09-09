@@ -2,6 +2,19 @@ import React,{useEffect,useState} from 'react';
 import axios from 'axios';
 import './App.css';
 
+const Weather =(props) =>{
+  const city = props.city
+  const apixu_key ="ca7e19b41ebf477fb8a174631190909"
+  const base_url ="http://api.apixu.com/v1/current.json"
+  //call apixu when i know how
+  console.log(city,"--weather--")
+  let url = base_url+"?key="+apixu_key+"&q="+city
+  console.log(url)
+  return(
+    <h2>weather for {city}</h2>
+  )
+}
+
 const Search =(props) =>{
   return(
     <>
@@ -75,7 +88,6 @@ return(
 const App = () =>{
   const[countries,setCountries] = useState('')
   const[filter,setFilter] = useState('')
-
   useEffect(()=>{
     const url = "http://restcountries.eu/rest/v2/all"
     //const url ="http://localhost:3001/countries"
