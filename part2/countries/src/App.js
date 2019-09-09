@@ -9,7 +9,11 @@ const Weather =(props) =>{
   //call apixu when i know how
   console.log(city,"--weather--")
   let url = base_url+"?key="+apixu_key+"&q="+city
-  console.log(url)
+  axios.get(url).then(
+    (response) =>{
+      console.log(response.data.current)
+    }
+  )
   return(
     <h2>weather for {city}</h2>
   )
@@ -48,6 +52,7 @@ const Country =(props) =>{
       <Lang languages={y[0].languages} />
       flag: {y[0].flag} <br />
       <img id ="img" src={y[0].flag} alt="flag of country" />
+      <Weather city={y[0].capital} />
       </div>
     )
 
