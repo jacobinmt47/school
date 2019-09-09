@@ -34,15 +34,16 @@ const Countries =(props) =>{
     const c = fc.map(x =><li key={x}>{x}</li>)
     if(c.length ===1){
       const y = cntry.filter(x =>x.name.toLowerCase().includes(filter))
-      console.log(y)
+      //console.log(y)
       return(
-        <>
+        <div>
         <h2>{y[0].name} </h2><br />
         capital: {y[0].capital} <br />
         population: {y[0].population} <br />
         <Lang languages={y[0].languages} />
         flag: {y[0].flag} <br />
-        </>
+        <img src={y[0].flag} alt="flag of country" />
+        </div>
       )
     }
     if(c.length >10){
@@ -69,8 +70,8 @@ const App = () =>{
   const[filter,setFilter] = useState('')
 
   useEffect(()=>{
-   // const url = "http://restcountries.eu/rest/v2/all"
-    const url ="http://localhost:3001/countries"
+    const url = "http://restcountries.eu/rest/v2/all"
+    //const url ="http://localhost:3001/countries"
    console.log("Effect called")
     axios.get(url ).then(
       (response)=>{
