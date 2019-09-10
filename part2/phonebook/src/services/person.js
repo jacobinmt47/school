@@ -24,7 +24,7 @@ const add =(person,persons,setPersons,setNewName,setNewPhone) =>{
 
 }
 const del=(person) =>{
-    axios.delete(person)
+    axios.delete(baseurl+"/"+person.id)
     .then(response =>{
         console.log(response)
     })

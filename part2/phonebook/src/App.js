@@ -79,10 +79,8 @@ const  App = () => {
     setFilterName( event.target.value)
   }
   const handleClick =(event) =>{
-    console.log(event.target.id)
     const id =event.target.id
     let r = window.confirm("do you want to delete")
-    console.log(r)
     if(r){
       //find person and delete
       if(Array.isArray(persons)){
