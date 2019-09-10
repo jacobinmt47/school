@@ -71,10 +71,17 @@ const  App = () => {
       alert(astring)
     }
     else{
-      const x = persons.concat(p)
-      setPersons(x)
-      setNewName('')
-      setNewPhone('')
+      axios.post("http://localhost:3001/persons",p)
+      .then(
+        (response) =>{
+           console.log(p,"was called from post")
+           const x = persons.concat(p)
+           setPersons(x)
+           setNewName('')
+           setNewPhone('')
+        }
+      )
+     
     }
   } 
   const handlePersonChange =(event) =>{
