@@ -1,5 +1,5 @@
 import React,{useState, useEffect} from 'react';
-import axios from 'axios'
+import pServices from './services/person'
 import './App.css';
 
 const Names = (props) =>{
@@ -47,13 +47,8 @@ const  App = () => {
   const [filterName, setFilterName] =useState('') 
   useEffect(() =>{
     console.log("effect called")
-    axios.get('http://localhost:3001/persons')
-    .then(response =>{
-      console.log("promise fullfilled")
-      if(persons ===''){//only call if persons is empty
-      setPersons(response.data)
-      }
-    })
+   pServices.getAll(persons,setPersons)
+
   },[persons]
   )
   const addName = (event) =>{
@@ -71,17 +66,7 @@ const  App = () => {
       alert(astring)
     }
     else{
-      axios.post("http://localhost:3001/persons",p)
-      .then(
-        (response) =>{
-           console.log(response,"was called from post")
-           const x = persons.concat(response.data)
-           setPersons(x)
-           setNewName('')
-           setNewPhone('')
-        }
-      )
-     
+      pServices.add(p,persons,setPersons,setNewName,setNewPhone)
     }
   } 
   const handlePersonChange =(event) =>{
