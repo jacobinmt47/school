@@ -12,7 +12,7 @@ const getAll =(persons,setPersons) =>{
         }
     })
 }
-//pServices.add(person,setPersons,setNewName,setNewPhone)
+//pServices.add(p,persons,setPersons,setNewName,setNewPhone)
 const add =(person,persons,setPersons,setNewName,setNewPhone) =>{
     axios.post(baseurl,person)
     .then((response) =>{
