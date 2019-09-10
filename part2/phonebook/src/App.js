@@ -8,7 +8,7 @@ const Names = (props) =>{
   if(Array.isArray(people)){
   const fp = people.filter((x) =>x.name.toLowerCase().includes(filter))
   if(typeof(fp ==='object')){ //if empty fp is undefined
-    const p = fp.map(x =><li key={x.id}>{x.name} {x.phoneNumber}</li>)
+    const p = fp.map(x =><li key={x.id}>{x.name} {x.phoneNumber} <button id={x.id} onClick={props.onClick}>delete</button></li>)
     return(p)
   }
 }
@@ -78,7 +78,20 @@ const  App = () => {
   const handleFilterChange = (event) =>{
     setFilterName( event.target.value)
   }
-
+  const handleClick =(event) =>{
+    console.log(event.target.id)
+    const id =event.target.id
+    let r = window.confirm("do you want to delete")
+    console.log(r)
+    if(r){
+      //find person and delete
+      if(Array.isArray(persons)){
+         let p = persons.filter((x) =>x.id===Number(id))
+         console.log('delete',p)
+         pServices.del(p[0])
+    }
+  }
+  }
   return (
     <div className="App">
       <h2>Phonebook</h2>
@@ -88,7 +101,7 @@ const  App = () => {
       addName={addName} newName={newName} newPhone={newPhone} handlePersonChange={handlePersonChange} handlePhoneChange={handlePhoneChange}
       />
       <h2>Numbers</h2>
-      <Names persons={persons} filter={filterName}  />
+      <Names persons={persons} filter={filterName} onClick={handleClick } />
     </div>
   );
 }

@@ -23,4 +23,10 @@ const add =(person,persons,setPersons,setNewName,setNewPhone) =>{
     })
 
 }
-export default{getAll,add}
+const del=(person) =>{
+    axios.delete(person)
+    .then(response =>{
+        console.log(response)
+    })
+}
+export default{getAll,add,del}
