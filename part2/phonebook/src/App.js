@@ -56,7 +56,7 @@ const  App = () => {
     })
   },[persons]
   )
-    const addName = (event) =>{
+  const addName = (event) =>{
     console.log("add Name Called ")
     event.preventDefault()
     const p ={
@@ -74,8 +74,8 @@ const  App = () => {
       axios.post("http://localhost:3001/persons",p)
       .then(
         (response) =>{
-           console.log(p,"was called from post")
-           const x = persons.concat(p)
+           console.log(response,"was called from post")
+           const x = persons.concat(response.data)
            setPersons(x)
            setNewName('')
            setNewPhone('')
