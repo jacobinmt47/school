@@ -1,21 +1,39 @@
 import React,{useEffect,useState} from 'react';
 import axios from 'axios';
 import './App.css';
-
+const Wxicon =(props) =>{
+  let wxc =""
+  let wxi =""
+  if(typeof(props.c)==="object"){
+    wxc = props.c.text
+    wxi = props.c.icon
+  }
+  return(
+    <>
+    {wxc}
+    <img alt="weather icon" src={wxi} />
+    </>
+  )
+}
 const Weather =(props) =>{
   const city = props.city
+  const setWx =props.setWx
   const apixu_key ="ca7e19b41ebf477fb8a174631190909"
   const base_url ="http://api.apixu.com/v1/current.json"
-  //call apixu when i know how
   console.log(city,"--weather--")
   let url = base_url+"?key="+apixu_key+"&q="+city
   axios.get(url).then(
     (response) =>{
-      console.log(response.data.current)
+      setWx(response.data.current)
     }
   )
   return(
+    <>
     <h2>weather for {city}</h2>
+      <li>Temperture in fahrenheit:  {props.wx.temp_f}</li>
+      <li>precip  {props.wx.precip_in}</li>
+      <li><Wxicon c={props.wx.condition} /></li>
+    </>
   )
 }
 
@@ -41,7 +59,7 @@ const Lang =(props) =>{
 }
 const Country =(props) =>{
   const cntry = props.cntry
-  const filter =props.filter
+  const filter = props.filter
     const y = cntry.filter(x =>x.name.toLowerCase().includes(filter))
     console.log(y)
     return(
@@ -52,7 +70,7 @@ const Country =(props) =>{
       <Lang languages={y[0].languages} />
       flag: {y[0].flag} <br />
       <img id ="img" src={y[0].flag} alt="flag of country" />
-      <Weather city={y[0].capital} />
+      <Weather city={y[0].capital} setWx={props.setWx} wx={props.wx}/>
       </div>
     )
 
@@ -69,7 +87,7 @@ const Countries =(props) =>{
     const c = fc.map(x =><div key={x+"key"}><li key={x}>{x}</li><button key={x+"btn"} id={x} onClick={props.btnclick}>show</button></div>)
     if(c.length ===1){
     return(
-      <Country key="cntry1" cntry={cntry} filter={filter}/>
+      <Country key="cntry1" cntry={cntry} filter={filter} setWx={props.setWx} wx={props.wx}/>
     )
     }
     if(c.length >10){
@@ -93,6 +111,8 @@ return(
 const App = () =>{
   const[countries,setCountries] = useState('')
   const[filter,setFilter] = useState('')
+  const[wx,setWx] = useState('')
+
   useEffect(()=>{
     const url = "http://restcountries.eu/rest/v2/all"
     //const url ="http://localhost:3001/countries"
@@ -113,12 +133,17 @@ const App = () =>{
     console.log(btn.id)
     setFilter(btn.id)
   }
+const handleWxChange = (event) =>{
+  console.log(event)
+  setWx(event)
+}
+
   
   return (
     <div key="div1"> 
       <Search key="search" filterName ={filter} handleFilterChange={handleFilterChange} />
       <ul key="ol1">
-      <Countries key ="countries1" cntry ={countries} filter={filter} btnclick={handleButtonPressed} />
+      <Countries key ="countries1" cntry ={countries} filter={filter} btnclick={handleButtonPressed}  setWx={handleWxChange} wx={wx}/>
       </ul>
     </div>
   );
