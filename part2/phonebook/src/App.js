@@ -65,8 +65,7 @@ const  App = () => {
       const astring = `${newName} update phone number?`
       const changePhoneNumber = window.confirm(astring)
       if(changePhoneNumber){
-        pServices.del(p)
-        pServices.add(p,persons,setPersons,setNewName,setNewPhone)
+        pServices.update(p,persons,setPersons,setNewName,setNewPhone)
       }
       
     }
@@ -85,13 +84,13 @@ const  App = () => {
   }
   const handleClick =(event) =>{
     const id =event.target.id
-    let r = window.confirm("do you want to delete")
+    const r = window.confirm("do you want to delete")
     if(r){
       //find person and delete
       if(Array.isArray(persons)){
          let p = persons.filter((x) =>x.id===Number(id))
          console.log('delete',p)
-         pServices.del(p[0])
+         pServices.del(p[0],persons,setPersons)
     }
   }
   }
