@@ -61,9 +61,14 @@ const  App = () => {
     }
     const isNew = persons.findIndex((x) => x.name===p.name)
     //console.log(isNew)
-    if(isNew >=0 ){  //reject existing people
-      const astring = `${newName} is already added to phonebook`
-      alert(astring)
+    if(isNew >=0 ){  
+      const astring = `${newName} update phone number?`
+      const changePhoneNumber = window.confirm(astring)
+      if(changePhoneNumber){
+        pServices.del(p)
+        pServices.add(p,persons,setPersons,setNewName,setNewPhone)
+      }
+      
     }
     else{
       pServices.add(p,persons,setPersons,setNewName,setNewPhone)
