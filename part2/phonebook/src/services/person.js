@@ -16,14 +16,16 @@ const getAll =(persons,setPersons,setErrorMsg) =>{
           setErrorMsg(error)
         })
 }
-//pServices.add(p,persons,setPersons,setNewName,setNewPhone)
+
 const add =(person,persons,setPersons,setNewName,setNewPhone,setErrorMsg) =>{
+    const successMsg ='success '+person.name+' added'
     axios.post(baseurl,person)
     .then((response) =>{
         const x = persons.concat(response.data)
         setPersons(x)
         setNewName('')
         setNewPhone('')
+        setErrorMsg(successMsg)
     })
     .catch(error =>
         {console.log(error)
