@@ -1,7 +1,7 @@
 import axios from 'axios'
 const baseurl ="http://localhost:3001/persons"
 
-const getAll =(persons,setPersons,setErrorMsg) =>{
+const getAll = (persons,setPersons,setErrorMsg) =>{
     console.log("getAll called")
     axios.get(baseurl)
     .then(response =>{
@@ -17,7 +17,7 @@ const getAll =(persons,setPersons,setErrorMsg) =>{
         })
 }
 
-const add =(person,persons,setPersons,setNewName,setNewPhone,setErrorMsg) =>{
+const add = (person,persons,setPersons,setNewName,setNewPhone,setErrorMsg) =>{
     const successMsg ='success '+person.name+' added'
     axios.post(baseurl,person)
     .then((response) =>{
@@ -34,24 +34,27 @@ const add =(person,persons,setPersons,setNewName,setNewPhone,setErrorMsg) =>{
 
 }
 const del=(person,persons,setPersons,setErrorMsg) =>{
+    const setp = () => {
+        let p = persons.filter(x =>x.id !== person.id)
+        setPersons(p)
+        setTimeout(()=>{setErrorMsg(null)},5000)
+    }
     axios.delete(baseurl+"/"+person.id)
     .then(response =>{
         console.log(response)
-        let p = persons.filter(x =>x.id !== person.id)
-        setPersons(p)
+        setp()
     })
     .catch(error =>
-        {console.log(error)
+        {
+        console.log(error)
         setErrorMsg(person.name+' is already deleted')
-        setTimeout(()=>{setErrorMsg(null)},5000)
+        setp()
     })
         
 }
 
 const update=(person,persons,setPersons,setNewName,setNewPhone,setErrorMsg) =>{
-//console.log(person)//log person to be updated
 const p = persons.filter(x=>x.name === person.name) // used to get id of old person
-//console.log(p[0]) 
 let pNew = p[0]
 pNew.phoneNumber =person.phoneNumber
 let np = persons.filter(x =>x.id !== p[0].id)
@@ -63,6 +66,7 @@ setNewPhone('')
 axios.put(baseurl+"/"+pNew.id,pNew)
 .then(response =>{
     console.log(response)
+    setErrorMsg('success '+p[0].name+' updated')
 })
 .catch(error =>
     {console.log(error)

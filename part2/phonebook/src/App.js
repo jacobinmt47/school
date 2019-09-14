@@ -2,6 +2,7 @@ import React,{useState, useEffect} from 'react';
 import pServices from './services/person'
 import Notification from './components/Notification'
 
+// convert to lowercase and return items that match
 const Names = (props) =>{
   const people = props.persons
   const filter = props.filter.toLowerCase()
@@ -14,6 +15,7 @@ const Names = (props) =>{
 }
   return('')
 }
+
 const PhoneFilter =(props) =>{
   //console.log(props)
   return(
@@ -38,9 +40,7 @@ const PersonForm =(props) =>{
   )
 }
 
-
 const  App = () => {
-  
   const [ persons, setPersons] = useState('')
   const [ newPhone, setNewPhone] = useState('')
   const [ newName, setNewName ] = useState('')
@@ -90,9 +90,10 @@ const  App = () => {
     if(r){
       //find person and delete
       if(Array.isArray(persons)){
-         let p = persons.filter((x) =>x.id===Number(id))
+         const p = persons.filter((x) =>x.id===Number(id))
          console.log('delete',p)
          pServices.del(p[0],persons,setPersons,setErrorMsg)
+         
     }
   }
   }
