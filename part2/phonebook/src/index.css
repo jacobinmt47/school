@@ -21,15 +21,26 @@ li {
   color: grey;
   padding-top: 3px;
   font-size: 15px;
+  list-style-type: none;
 }
 
 .error{
   color:red;
   font-size: 15px;
+  font-style: italic;
+  list-style-type:none;
+  background:gray;
+  border-style: solid;
+  border-radius:5px;
 }
 
 .success{
+  padding:3px;
+  background:lightgreen;
+  border-style:solid;
+  border-radius:4px;
   color:green;
   font-size:15px;
   font-style: italic;
+  list-style-type: none;
 }

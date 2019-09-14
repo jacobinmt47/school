@@ -4,6 +4,7 @@ const Notification = (props) => {
     if (props.error === null){
         return null
     }
+    if(typeof(props.error)==='string'){
     if(props.error.includes('success')){
         return(
             <li className='success' >
@@ -11,9 +12,10 @@ const Notification = (props) => {
             </li>
         )
     }
+}
     return (
         <li className='error'>
-            {props.error}
+            'person all ready deleted' 
         </li>
     )
 }

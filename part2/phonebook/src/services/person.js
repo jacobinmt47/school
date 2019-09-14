@@ -13,7 +13,7 @@ const getAll =(persons,setPersons,setErrorMsg) =>{
     })
     .catch(error =>
         {console.log(error)
-          setErrorMsg(error)
+          setErrorMsg('get all failed')
         })
 }
 
@@ -29,7 +29,7 @@ const add =(person,persons,setPersons,setNewName,setNewPhone,setErrorMsg) =>{
     })
     .catch(error =>
         {console.log(error)
-            setErrorMsg(error)
+            setErrorMsg('add failed')
         })
 
 }
@@ -42,7 +42,10 @@ const del=(person,persons,setPersons,setErrorMsg) =>{
     })
     .catch(error =>
         {console.log(error)
-        setErrorMsg(error)})
+        setErrorMsg(person.name+' is already deleted')
+        setTimeout(()=>{setErrorMsg(null)},5000)
+    })
+        
 }
 
 const update=(person,persons,setPersons,setNewName,setNewPhone,setErrorMsg) =>{
@@ -63,7 +66,7 @@ axios.put(baseurl+"/"+pNew.id,pNew)
 })
 .catch(error =>
     {console.log(error)
-    setErrorMsg(error)
+    setErrorMsg('update failed')
     })
 
 }
