@@ -1,6 +1,6 @@
 import React,{useState, useEffect} from 'react';
 import pServices from './services/person'
-import './App.css';
+import Notification from './components/Notification'
 
 const Names = (props) =>{
   const people = props.persons
@@ -44,10 +44,12 @@ const  App = () => {
   const [ persons, setPersons] = useState('')
   const [ newPhone, setNewPhone] = useState('')
   const [ newName, setNewName ] = useState('')
-  const [filterName, setFilterName] =useState('') 
+  const [filterName, setFilterName] = useState('') 
+  const [errorMsg, setErrorMsg] = useState(null)
+
   useEffect(() =>{
     console.log("effect called")
-   pServices.getAll(persons,setPersons)
+   pServices.getAll(persons,setPersons,setErrorMsg)
 
   },[persons]
   )
@@ -65,12 +67,12 @@ const  App = () => {
       const astring = `${newName} update phone number?`
       const changePhoneNumber = window.confirm(astring)
       if(changePhoneNumber){
-        pServices.update(p,persons,setPersons,setNewName,setNewPhone)
+        pServices.update(p,persons,setPersons,setNewName,setNewPhone,setErrorMsg)
       }
       
     }
     else{
-      pServices.add(p,persons,setPersons,setNewName,setNewPhone)
+      pServices.add(p,persons,setPersons,setNewName,setNewPhone,setErrorMsg)
     }
   } 
   const handlePersonChange =(event) =>{
@@ -90,12 +92,13 @@ const  App = () => {
       if(Array.isArray(persons)){
          let p = persons.filter((x) =>x.id===Number(id))
          console.log('delete',p)
-         pServices.del(p[0],persons,setPersons)
+         pServices.del(p[0],persons,setPersons,setErrorMsg)
     }
   }
   }
   return (
     <div className="App">
+      <Notification error ={errorMsg} />
       <h2>Phonebook</h2>
       <PhoneFilter filterName={filterName} handleFilterChange={handleFilterChange} />
       <h2>Add a new </h2>

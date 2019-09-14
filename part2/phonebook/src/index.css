@@ -22,3 +22,14 @@ li {
   padding-top: 3px;
   font-size: 15px;
 }
+
+.error{
+  color:red;
+  font-size: 15px;
+}
+
+.success{
+  color:green;
+  font-size:15px;
+  font-style: italic;
+}
