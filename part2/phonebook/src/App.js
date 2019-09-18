@@ -9,7 +9,7 @@ const Names = (props) =>{
   if(Array.isArray(people)){
   const fp = people.filter((x) =>x.name.toLowerCase().includes(filter))
   if(typeof(fp ==='object')){ //if empty fp is undefined
-    const p = fp.map(x =><li key={x.id}>{x.name} {x.phoneNumber} <button id={x.id} onClick={props.onClick}>delete</button></li>)
+    const p = fp.map(x =><li key={x.id}>{x.name} {x.phonenumber} <button id={x.id} onClick={props.onClick}>delete</button></li>)
     return(p)
   }
 }
@@ -59,7 +59,7 @@ const  App = () => {
     const p ={
       name:newName,
       id:persons.length,
-      phoneNumber:newPhone
+      phonenumber:newPhone
     }
     const isNew = persons.findIndex((x) => x.name===p.name)
     //console.log(isNew)
