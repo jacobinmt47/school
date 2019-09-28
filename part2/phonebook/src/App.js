@@ -91,7 +91,7 @@ const  App = () => {
     if(r){
       //find person and delete
       if(Array.isArray(persons)){
-         const p = persons.filter((x) =>x.id===Number(id))
+         const p = persons.filter((x) =>x.id===id)
          console.log('delete',p)
          pServices.del(p[0],persons,setPersons,setErrorMsg)
          
