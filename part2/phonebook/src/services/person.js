@@ -39,7 +39,7 @@ const del=(person,persons,setPersons,setErrorMsg) =>{
         setPersons(p)
         setTimeout(()=>{setErrorMsg(null)},5000)
     }
-    axios.delete(baseurl+"/"+person.id)
+    axios.delete(baseurl+'/'+person.id)
     .then(response =>{
         console.log(response)
         setp()
