@@ -86,7 +86,7 @@ const  App = () => {
   }
   const handleClick =(event) =>{
     const id =event.target.id
-    console.log(id)
+    console.log(id,'  ',typeof(id))
     const r = window.confirm("do you want to delete")
     if(r){
       //find person and delete
