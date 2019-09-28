@@ -1,5 +1,9 @@
 import axios from 'axios'
+<<<<<<< HEAD
 const baseurl ="http://localhost:3001/api/persons"
+=======
+const baseurl ="/api/persons"
+>>>>>>> p2.21
 
 const getAll = (persons,setPersons,setErrorMsg) =>{
     console.log("getAll called")
@@ -39,7 +43,7 @@ const del=(person,persons,setPersons,setErrorMsg) =>{
         setPersons(p)
         setTimeout(()=>{setErrorMsg(null)},5000)
     }
-    axios.delete(baseurl+"/"+person.id)
+    axios.delete(baseurl+'/'+person.id)
     .then(response =>{
         console.log(response)
         setp()
