@@ -1,9 +1,5 @@
 import axios from 'axios'
-<<<<<<< HEAD
-const baseurl ="http://localhost:3001/api/persons"
-=======
 const baseurl ="/api/persons"
->>>>>>> p2.21
 
 const getAll = (persons,setPersons,setErrorMsg) =>{
     console.log("getAll called")
