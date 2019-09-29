@@ -7,6 +7,8 @@ const Names = (props) =>{
   const people = props.persons
   const filter = props.filter.toLowerCase()
   if(Array.isArray(people)){
+  console.log(people)
+  console.log(typeof(people[0].name))
   const fp = people.filter((x) =>x.name.toLowerCase().includes(filter))
   if(typeof(fp ==='object')){ //if empty fp is undefined
     const p = fp.map(x =><li key={x.id}>{x.name} {x.phonenumber} <button id={x.id} onClick={props.onClick}>delete</button></li>)
@@ -58,11 +60,12 @@ const  App = () => {
     event.preventDefault()
     const p ={
       name:newName,
-      id:persons.length,
+      id:Math.floor(Math.random()*4000000000),
       phonenumber:newPhone
     }
+    console.log(p)
     const isNew = persons.findIndex((x) => x.name===p.name)
-    //console.log(isNew)
+    console.log(isNew)
     if(isNew >=0 ){  
       const astring = `${newName} update phone number?`
       const changePhoneNumber = window.confirm(astring)
