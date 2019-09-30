@@ -56,14 +56,16 @@ const del=(person,persons,setPersons,setErrorMsg) =>{
 const update=(person,persons,setPersons,setNewName,setNewPhone,setErrorMsg) =>{
 const p = persons.filter(x=>x.name === person.name) // used to get id of old person
 let pNew = p[0]
-pNew.phoneNumber =person.phoneNumber
+person.id = pNew.id
+//pNew.phoneNumber =person.phoneNumber
 let np = persons.filter(x =>x.id !== p[0].id)
-np = np.concat(pNew)
-console.log(pNew)
+np = np.concat(person)
+console.log(person,'-----')
+//console.log(pNew)
 setPersons(np)
 setNewName('')
 setNewPhone('')
-axios.put(baseurl+"/"+pNew.id,pNew)
+axios.put(baseurl+"/"+person.id,person)
 .then(response =>{
     console.log(response)
     setErrorMsg('success '+p[0].name+' updated')
