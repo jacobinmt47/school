@@ -12,10 +12,17 @@ const Notification = (props) => {
             </li>
         )
     }
+    else{
+        return(
+            <li className='error'>
+                {props.error}
+            </li>
+        )
+    }
 }
     return (
         <li className='error'>
-            'person all ready deleted' 
+            'an error occured' 
         </li>
     )
 }
