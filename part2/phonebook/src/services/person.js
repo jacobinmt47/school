@@ -18,7 +18,10 @@ const getAll = (persons,setPersons,setErrorMsg) =>{
 }
 
 const add = (person,persons,setPersons,setNewName,setNewPhone,setErrorMsg) =>{
-    const successMsg ='success '+person.name+' added'
+    const successMsg ='success '+person.name+' added'e
+    const phone_len = person.phonenumber.length()
+    const name_len = person.name.length()
+    if(phone_len >7 && name_len >2){
     axios.post(baseurl,person)
     .then((response) =>{
         const x = persons.concat(response.data)
@@ -31,6 +34,8 @@ const add = (person,persons,setPersons,setNewName,setNewPhone,setErrorMsg) =>{
         {console.log(error)
             setErrorMsg('add failed')
         })
+    }
+    else{setErrorMsg('phone number must be at least 8 charaters and name at least 3')}
 
 }
 const del=(person,persons,setPersons,setErrorMsg) =>{
