@@ -18,7 +18,7 @@ const getAll = (persons,setPersons,setErrorMsg) =>{
 }
 
 const add = (person,persons,setPersons,setNewName,setNewPhone,setErrorMsg) =>{
-    const successMsg ='success '+person.name+' added'e
+    const successMsg ='success '+person.name+' added' ;
     const phone_len = person.phonenumber.length()
     const name_len = person.name.length()
     if(phone_len >7 && name_len >2){
